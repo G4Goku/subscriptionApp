@@ -5,6 +5,6 @@ const authController = require('../contoller/auth.controller')
 const authValidation = require('../middleware/validation/user.validation')
 
 router.post('/register',authValidation.register,authController.register)
-router.post('/login',authController.login)
+router.post('/login',authValidation.login,authController.login)
 
 module.exports = router

@@ -21,7 +21,7 @@ const register =async (req,res) =>{
         return res.status(400).send({ message: constants.EMAIL_ALREADY_EXIST })
     }
  } catch (error) {
-    // return res.status(500).send({ message: error.message })
+    return res.status(500).send({ message: error.message })
  }
     
 }
@@ -29,14 +29,13 @@ const register =async (req,res) =>{
 const login = async(req,res) => {
     try {
         const {email, password} = req.body
-        if (!email || !password) return res.status(400).send({message: constants.BAD_REQUEST})
         const user = await authService.getUserByEmail({email})
-        if (!user) return res.status(400).send({message: "Invalid email"})
+        if (!user) return res.status(400).send({message: constants.INVALID_EMAIL})
         const validatePassword = await bcrypt.compare(password,user.password)
         console.log(validatePassword,"validatePassword")
-        if (!validatePassword) return res.status(400).send({message: "Invalid password"}) 
+        if (!validatePassword) return res.status(400).send({message: constants.INVALID_PASSWORD }) 
         const token = jwt.sign({user},secretKey)
-        return res.header('x-auth-token',token).status(200).send({message: "User logged in successfully"})
+        return res.header('x-auth-token',token).status(200).send({message: constants.LOGIN_SUCCESS})
     } catch (error) {
         return res.status(500).send({message: error.message})
     }
