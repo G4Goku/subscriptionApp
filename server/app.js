@@ -18,7 +18,7 @@ mongoose.connect(mongoUrl)
 app.use(cors())
 app.use(express.json())
 app.use(morgan('tiny'))
-app.use('/api/vidly/user',user)
+app.use('/api/v1/vidly/user',user)
 
-const port = process.env.PORT || 3000
+const port = process.env.PORT || 5000
 app.listen(port, () => console.log(`App listening to port ${port}`))
