@@ -1,25 +1,42 @@
-import React from "react";
+import React, { useState } from "react";
 import { Form, FormGroup, Input, Label, Button, Card, CardBody, } from "reactstrap";
 import { Link } from "react-router-dom"
-import axios from "axios"
+import { login, register } from '../helper/api_helper'
+import { toast, ToastContainer } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
 
 const InputForm = (props) => {
-    console.warn(process.env.REACT_APP_BASE_URL,"url")
-    const handleClick = () =>{
-        const data ={
-            email:"gokul@gmail.com",
-            password: "12345"
+    const [userName, setUserName] = useState()
+    const [email, setEmail] = useState()
+    const [password, setPassword] = useState()
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        let response
+        try {
+            if (props?.isLogin) {
+                response = await login({ email, password });
+            }else{
+                response = await register({ userName, email, password });
+            }
+            const responseData = response.data;
+            toast.success(responseData.message, {
+                position: toast.POSITION.TOP_RIGHT
+            });
+        } catch (error) {
+            toast.error(error.response.data.message, {
+                position: toast.POSITION.TOP_RIGHT
+            });
+            console.error(error, "error");
         }
-        axios.post(`${process.env.REACT_APP_BASE_URL}/user/login`,data).then((response) => {
-            console.warn(response);
-          });
     }
     return (
         <React.Fragment>
+            <ToastContainer />
             <div className="d-flex justify-content-center ">
                 <Card className="w-50 text-center">
                     <CardBody >
-                        <Form>
+                        <Form onSubmit={handleSubmit}>
                             {!props.isLogin &&
                                 <FormGroup floating>
                                     <Input
@@ -27,6 +44,7 @@ const InputForm = (props) => {
                                         name="text"
                                         placeholder="Name"
                                         type="text"
+                                        onChange={(e) => setUserName(e.target.value)}
                                     />
                                     <Label for="exampleName">Name</Label>
                                 </FormGroup>}
@@ -37,6 +55,7 @@ const InputForm = (props) => {
                                     name="email"
                                     placeholder="Email"
                                     type="email"
+                                    onChange={(e) => setEmail(e.target.value)}
                                 />
                                 <Label for="exampleEmail">Email</Label>
                             </FormGroup>{' '}
@@ -46,11 +65,12 @@ const InputForm = (props) => {
                                     name="password"
                                     placeholder="Password"
                                     type="password"
+                                    onChange={(e) => setPassword(e.target.value)}
                                 />
                                 <Label for="examplePassword">Password</Label>
                             </FormGroup>{' '}
                             <div className="d-flex justify-content-center mb-3">
-                                <Button onClick={handleClick} className="w-50" color="primary">{props.isLogin ? "Login" : "Register"}</Button>
+                                <Button type="submit" className="w-50" color="primary">{props.isLogin ? "Login" : "Register"}</Button>
                             </div>
                             <span>
                                 {props.isLogin ? "Don't have an account ?" : "Already have an account ?"}
