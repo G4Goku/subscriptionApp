@@ -13,13 +13,16 @@ const InputForm = (props) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         let response
+        let responseData
         try {
             if (props?.isLogin) {
                 response = await login({ email, password });
-            }else{
+                const responseData = response.data;
+                localStorage.setItem('authToken', responseData.token);
+            } else {
                 response = await register({ userName, email, password });
             }
-            const responseData = response.data;
+            responseData = response.data;
             toast.success(responseData.message, {
                 position: toast.POSITION.TOP_RIGHT
             });

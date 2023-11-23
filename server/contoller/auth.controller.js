@@ -35,7 +35,7 @@ const login = async(req,res) => {
         console.log(validatePassword,"validatePassword")
         if (!validatePassword) return res.status(400).send({message: constants.INVALID_PASSWORD }) 
         const token = jwt.sign({user},secretKey)
-        return res.header('x-auth-token',token).status(200).send({message: constants.LOGIN_SUCCESS})
+        return res.status(200).send({message: constants.LOGIN_SUCCESS, token})
     } catch (error) {
         return res.status(500).send({message: error.message})
     }
