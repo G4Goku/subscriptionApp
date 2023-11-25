@@ -8,6 +8,9 @@ const constants ={
     REGISTRATION_SUCCESS: "User registered successfully",
 
     LOGIN_SUCCESS:"User logged in successfully",
+    
+    PRICE_LIST_FAILED:"Price listing failed",
+    PRICE_LIST_SUCCESS:"Price listed successfully",
 
 }
 

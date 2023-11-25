@@ -4,7 +4,6 @@ const constants = require('../utils/constants')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const secretKey = process.env.JWT_TOKEN
-console.log(secretKey,"secretKey")
 
 const register =async (req,res) =>{
  try {
