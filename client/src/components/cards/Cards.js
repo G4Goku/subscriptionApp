@@ -1,5 +1,4 @@
 import React from "react";
-import { Col, Row, CardBody, CardGroup, Card, CardImg, CardTitle, CardSubtitle, CardText, Button } from "reactstrap";
 import "../../css/common.css"
 
 const Cards = () => {
