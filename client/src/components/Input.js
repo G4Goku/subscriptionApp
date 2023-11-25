@@ -73,9 +73,9 @@ const InputForm = (props) => {
                                 <Label for="examplePassword">Password</Label>
                             </FormGroup>{' '}
                             <div className="d-flex justify-content-center mb-3">
-                                <Button type="submit" className="w-50" color="primary">{props.isLogin ? "Login" : "Register"}</Button>
+                                <button type="submit" className="w-50 button border border-0" >{props.isLogin ? "Login" : "Register"}</button>
                             </div>
-                            <span>
+                            <span className="fw-light fs-6 text-muted">
                                 {props.isLogin ? "Don't have an account ?" : "Already have an account ?"}
                                 <Link to={props.isLogin ? "/register" : "/login"}>{props.isLogin ? "Register" : "Login"}</Link>
                             </span>
