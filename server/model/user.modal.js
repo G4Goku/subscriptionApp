@@ -16,7 +16,11 @@ userSchema = new User({
     password:{
         type: String,
         required: true
-    }
+    },
+    stripeCustomerId:{
+        type: String
+    },
+    subscriptions : [],
 })
 
 const Users = mongoose.model('User', userSchema);
