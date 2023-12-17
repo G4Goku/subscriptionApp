@@ -4,6 +4,8 @@ import Home from './pages/Home'
 import Login from './pages/Login'
 import Register from './pages/Register'
 import Nav from './components/NavBar'
+import ChoosePlanCard from './components/cards/ChoosePlanCard';
+
 // import Footer from './components/Footer';
 
 
@@ -13,6 +15,7 @@ function App() {
       {/* <Nav /> */}
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/card" element={<ChoosePlanCard />} />
         <Route path="/login" element={< Login />} />
         <Route path="/register" element={<Register />} />
       </Routes>

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Form, FormGroup, Input, Label, Button, Card, CardBody, } from "reactstrap";
+import { Form, FormGroup, Input, Label, Card, CardBody, } from "reactstrap";
 import { Link } from "react-router-dom"
 import { login, register } from '../helper/api_helper'
 import { toast, ToastContainer } from 'react-toastify';
@@ -17,15 +17,20 @@ const InputForm = (props) => {
         try {
             if (props?.isLogin) {
                 response = await login({ email, password });
-                const responseData = response.data;
+                responseData = response.data;
                 localStorage.setItem('authToken', responseData.token);
             } else {
                 response = await register({ userName, email, password });
+                responseData = response.data;
+                localStorage.setItem('authToken', responseData.token);
             }
             responseData = response.data;
             toast.success(responseData.message, {
                 position: toast.POSITION.TOP_RIGHT
             });
+            setEmail("")
+            setPassword("")
+            setUserName("")
         } catch (error) {
             toast.error(error.response.data.message, {
                 position: toast.POSITION.TOP_RIGHT
@@ -73,11 +78,11 @@ const InputForm = (props) => {
                                 <Label for="examplePassword">Password</Label>
                             </FormGroup>{' '}
                             <div className="d-flex justify-content-center mb-3">
-                                <button type="submit" className="w-50 button border border-0" >{props.isLogin ? "Login" : "Register"}</button>
+                                <button type="submit" className="btn btn-danger btn-lg fs-6" >{props.isLogin ? "Sign In" : "Sign Up"}</button>
                             </div>
                             <span className="fw-light fs-6 text-muted">
                                 {props.isLogin ? "Don't have an account ?" : "Already have an account ?"}
-                                <Link to={props.isLogin ? "/register" : "/login"}>{props.isLogin ? "Register" : "Login"}</Link>
+                                <Link className= "text-primary fs-6 ms-1 text-decoration-underline" to={props.isLogin ? "/register" : "/login"}>{props.isLogin ? "sign up" : "sign in"}</Link>
                             </span>
                         </Form>
                     </CardBody>

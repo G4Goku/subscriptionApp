@@ -21,7 +21,7 @@ const NavBar = () => {
                 </button>
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul className="navbar-nav ms-auto me-5">
-                            <Link to="/" className="nav-link active">
+                            <Link to="/" className="nav-link active fw-medium">
                                 Home
                             </Link>
                     </ul>

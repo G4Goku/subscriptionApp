@@ -2,6 +2,7 @@ import React from "react";
 import Cards from "../components/cards/Cards";
 import "../css/home.css"
 import { Button, Col, Row } from "reactstrap";
+import { Link } from "react-router-dom";
 
 const Home = () => {
   return (
@@ -11,7 +12,7 @@ const Home = () => {
         <a class="header__logo" href="#">
           <img src="https://raw.githubusercontent.com/thatanjan/netflix-clone-yt/youtube/media/netflix.svg" alt="" />
         </a>
-        <Button color="danger">Sign in</Button>
+        <Link to="/login" className="btn btn-danger">Sign in</Link>
       </header>
 
       <section class="banner__section">
@@ -21,9 +22,9 @@ const Home = () => {
         <div class="banner__content">
           <h1 class="banner__title">Unlimited movies, TV shows, and more.</h1>
           <h4 class="banner__subtitle">Watch anywhere. Cancel anytime.</h4>
-          <Button className="btn btn-danger btn-lg">
+          <Link to="/register" className="btn btn-danger btn-lg">
             Get started
-          </Button>
+          </Link>
         </div>
       </section>
 
