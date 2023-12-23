@@ -2,6 +2,47 @@
     padding-top: 150px;
     width: 26%;
 }
-.next_button{
+
+.next_button {
     width: 316px;
+}
+
+.plan_side_table {
+    margin-top: 41px;
+}
+
+body {
+	font-family: Helvetica;
+	font-size: 13px;
+}
+
+div.callout {
+	height: 100px;
+	width: 110px;
+	float: left;
+}
+
+div.callout {
+	background-color: #d80000;
+	position: relative;
+	color: #ffffff;
+    text-align: center;
+	padding: 10px;
+	border-radius: 3px;
+	margin: 25px;
+	min-height: 50px;
+}
+
+.callout::before {
+	content: "";
+	width: 0px;
+	height: 0px;
+	border: 0.8em solid transparent;
+	position: absolute;
+}
+
+.callout.top::before {
+	left: 40%;
+	bottom: -20px;
+	border-top: 10px solid #d80000;
 }
