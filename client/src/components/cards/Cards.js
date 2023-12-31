@@ -71,31 +71,33 @@ const Cards = () => {
                         <table class="table">
                             <thead>
                                 <tr>
-                                    <th scope="col">Header 1</th>
-                                    <th scope="col">Header 2</th>
-                                    <th scope="col">Header 3</th>
+                                    <th scope="col">
+                                        <div className="callout top">Premium</div>
+                                    </th>
+                                    <th scope="col">
+                                        <div className="callout top">Premium</div>
+                                    </th>
+                                    <th scope="col">
+                                        <div className="callout top">Premium</div>
+                                    </th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>Value 1.1</td>
-                                    <td>Value 1.2</td>
-                                    <td>Value 1.3</td>
+                                    <td className="text-center">Value 1.1</td>
+                                    <td className="text-center">Value 1.2</td>
+                                    <td className="text-center">Value 1.3</td>
                                 </tr>
                                 <tr>
-                                    <td>Value 2.1</td>
-                                    <td>Value 2.2</td>
-                                    <td>Value 2.3</td>
+                                    <td className="text-center">Value 2.1</td>
+                                    <td className="text-center">Value 2.2</td>
+                                    <td className="text-center">Value 2.3</td>
                                 </tr>
                             </tbody>
                         </table>
                     </Col>
                 </Row>
             </div>
-
-
-            <div class="callout top">Premium</div>
-
         </React.Fragment>
 
     )
