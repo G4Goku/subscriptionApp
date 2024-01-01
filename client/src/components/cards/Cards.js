@@ -7,15 +7,16 @@ import { Col, Row } from "reactstrap";
 
 const Cards = () => {
 
-    // const [prices, setPrices] = useState()
-    // useEffect(() => {
-    //     fetchPrices()
-    // }, []);
+    const [prices, setPrices] = useState()
+    console.warn({ prices });
+    useEffect(() => {
+        fetchPrices()
+    }, []);
 
-    // const fetchPrices = async () => {
-    //     const result = await listPrice()
-    //     setPrices(result.data.prices)
-    // }
+    const fetchPrices = async () => {
+        const result = await listPrice()
+        setPrices(result.data.prices)
+    }
 
     return (
         <React.Fragment>
@@ -48,21 +49,17 @@ const Cards = () => {
                         <table class="table plan_side_table">
                             <thead>
                                 <tr>
-                                    {/* <th scope="col">Header 1</th> */}
-                                    {/* <th scope="col">Header 2</th>
-                                <th scope="col">Header 3</th> */}
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>Value 1.1</td>
-                                    {/* <td>Value 1.2</td>
-                                <td>Value 1.3</td> */}
+                                    <td className="fw-bold">Monthly price</td>
                                 </tr>
                                 <tr>
-                                    <td>Value 2.1</td>
-                                    {/* <td>Value 2.2</td>
-                                <td>Value 2.3</td> */}
+                                    <td className="fw-bold">Video quality</td>
+                                </tr>
+                                <tr>
+                                    <td className="fw-bold">Resolution</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -71,27 +68,28 @@ const Cards = () => {
                         <table class="table">
                             <thead>
                                 <tr>
-                                    <th scope="col">
-                                        <div className="callout top">Premium</div>
-                                    </th>
-                                    <th scope="col">
-                                        <div className="callout top">Premium</div>
-                                    </th>
-                                    <th scope="col">
-                                        <div className="callout top">Premium</div>
-                                    </th>
+                                    {prices?.map((price, index) => (
+                                        <th key={index} scope="col" style={{ borderBottom: "0px" }}>
+                                            <div className="callout top d-flex align-items-center justify-content-center">{price.nickname}</div>
+                                        </th>
+                                    ))}
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td className="text-center">Value 1.1</td>
-                                    <td className="text-center">Value 1.2</td>
-                                    <td className="text-center">Value 1.3</td>
+                                    {prices?.map((price, index) => (
+                                        <td ><span className="table_value fw-bold">${price.unit_amount / 100}</span></td>
+                                    ))}
                                 </tr>
                                 <tr>
-                                    <td className="text-center">Value 2.1</td>
-                                    <td className="text-center">Value 2.2</td>
-                                    <td className="text-center">Value 2.3</td>
+                                    <td ><span className="table_value fw-bold">Good</span></td>
+                                    <td ><span className="table_value fw-bold">Better</span></td>
+                                    <td ><span className="table_value fw-bold">Best</span></td>
+                                </tr>
+                                <tr>
+                                    <td ><span className="table_value fw-bold">720p</span></td>
+                                    <td ><span className="table_value fw-bold">1080p</span></td>
+                                    <td ><span className="table_value fw-bold">{"4K+HDR"}</span></td>
                                 </tr>
                             </tbody>
                         </table>

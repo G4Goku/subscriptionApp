@@ -8,7 +8,8 @@
 }
 
 .plan_side_table {
-    margin-top: 167px;
+    margin-left: 82px;
+    margin-top: 142px;
 }
 
 body {
@@ -29,7 +30,7 @@ div.callout {
     text-align: center;
 	padding: 10px;
 	border-radius: 3px;
-	margin: 25px;
+	margin: 26px 0px 0px 30px;
 	min-height: 50px;
 }
 
@@ -46,3 +47,8 @@ div.callout {
 	bottom: -20px;
 	border-top: 10px solid #d80000;
 }
+
+.table_value{
+	margin-left: 70px;
+}
+
