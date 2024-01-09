@@ -5,6 +5,6 @@ const subscriptionController = require('../controller/subscription.controller')
 
 
 router.get('/listPrices',middleware.auth , subscriptionController.listPrices)
-// router.post('/login',authValidation.login,authController.login)
+router.post('/subscribe',middleware.auth, subscriptionController.subscribe)
 
 module.exports = router

@@ -7,7 +7,14 @@ const list = async () =>{
       });
     return prices   
 }
+const subscribe = async (userData) =>{
+    // let prices = await stripe.prices.list({
+    //     limit: 3,
+    //   });
+    // return prices   
+}
 
 module.exports = {
-    list
+    list,
+    subscribe
 }
