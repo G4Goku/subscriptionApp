@@ -11,6 +11,8 @@ const constants ={
     
     PRICE_LIST_FAILED:"Price listing failed",
     PRICE_LIST_SUCCESS:"Price listed successfully",
+    SUBSCRIPTION_FAILED:"Subscription failed",
+    SUBSCRIPTION_SUCCESS:"Subscription success",
 
 }
 
