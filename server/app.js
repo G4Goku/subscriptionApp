@@ -6,6 +6,7 @@ const morgan =require('morgan')
 const app = express()
 const user = require('./routes/auth.route')
 const subscription = require('./routes/subscription.route')
+const movie = require('./routes/movie.route')
 const mongoUrl = process.env.MONGO_URL
 
 if(! process.env.JWT_TOKEN) {
@@ -19,8 +20,9 @@ mongoose.connect(mongoUrl)
 app.use(cors())
 app.use(express.json())
 app.use(morgan('tiny'))
-app.use('/api/v1/vidly/user',user)
-app.use('/api/v1/vidly/subscription',subscription)
+app.use('/api/v1/netflixClone/user',user)
+app.use('/api/v1/netflixClone/subscription',subscription)
+app.use('/api/v1/netflixClone/movie',movie)
 
 const port = process.env.PORT || 5000
 app.listen(port, () => console.log(`App listening to port ${port}`))

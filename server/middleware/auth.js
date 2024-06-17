@@ -3,11 +3,13 @@ require('dotenv').config();
 const authService = require('../service/auth.service')
 
 const auth = async (req, res, next) => {
-   const token = req.header('x-auth-token');
+   const accessToken = req.header('x-auth-token');
+   const token = accessToken.slice(7)
+   console.log(token, ":token")
    if (!token) return res.status(401).send("ACCESS DENIED: Authorization token is undefined");
    try {
       const decode = verify(token, process.env.JWT_TOKEN);
-      const user = await authService.getUserById({_id: decode.sub})
+      const user = await authService.getUserById({ _id: decode.sub })
       req.user = user;
       next();
    } catch (error) {
@@ -16,10 +18,11 @@ const auth = async (req, res, next) => {
 }
 
 const permission = async (req, res, next) => {
-   const token = req.header('x-auth-token');
+   const accessToken = req.header('x-auth-token');
+   const token = accessToken.slice(7)
    if (token) {
       const decode = verify(token, process.env.JWT_TOKEN);
-      const user = await authService.getUserById({_id: decode.sub})
+      const user = await authService.getUserById({ _id: decode.sub })
       req.user = user;
       if (decode.user.isAdmin === true) {
          next();

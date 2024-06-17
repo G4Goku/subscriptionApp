@@ -14,6 +14,9 @@ const constants ={
     SUBSCRIPTION_FAILED:"Subscription failed",
     SUBSCRIPTION_SUCCESS:"Subscription success",
 
+    MOVIE_LIST_FAILED:"Movie listing failed",
+    MOVIE_LIST_SUCCESS:"Movie listed successfully",
+
 }
 
 module.exports = constants
