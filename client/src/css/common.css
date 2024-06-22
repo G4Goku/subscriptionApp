@@ -51,4 +51,14 @@ div.callout {
 .table_value{
 	margin-left: 70px;
 }
+/* dashboard nav bar */
+.nav{
+    width: 100%;
+    position: fixed;
+   z-index: 1;
+}
+.nav-black{
+    background-color: black;
+    height: 60px;
+}
 

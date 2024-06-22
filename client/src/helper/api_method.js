@@ -1,24 +1,33 @@
 import axios from "axios";
+
 const setUrl = (path) => {
     axios.defaults.baseURL = process.env.REACT_APP_BASE_URL
     if (path) {
-      axios.defaults.baseURL = `${process.env.REACT_APP_BASE_URL}${path}`  
+      axios.defaults.baseURL = `${process.env.REACT_APP_BASE_URL}${path}` 
     }
   }
 
 class APIClient {
 
-    get = (path, data) => {
+    get = (path, data, params) => {
       setUrl(path);
       let response;
+      let paramKeys;
       const authToken = localStorage.getItem("authToken")
         ? localStorage.getItem("authToken")
         : null;
-        console.warn({authToken});
       if (authToken) axios.defaults.headers.common["x-auth-token"] = authToken;  
-      if (data) {
+      if (params) {
+        Object.keys(params).map((key) => {
+          paramKeys.push(key + "=" + params[key]);
+          return paramKeys;
+        });
+        const queryString =
+          paramKeys && paramKeys.length ? paramKeys.join("&") : "";
+        response = axios.get(`${process.env.REACT_APP_BASE_URL}/${path}?${queryString}`, params);
+      } else if (data) {
         response = axios.get('/', data);
-      }else {
+      } else{
         response = axios.get();
       }
       return response;

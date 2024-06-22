@@ -1,0 +1,27 @@
+.banner {
+    height: 550px;
+    
+    
+    /* object-fit: contain; */
+}
+
+.bannercontent {
+    padding: 250px;
+    margin-left: -212px;
+    height: 200px;
+}
+
+button {
+    cursor: pointer;
+    border: none;
+    background: rgba(62, 62, 62, 0.3);
+    height: 34px;
+    width: 130px;
+    color: #ffffff;
+    font-size: .9em;
+    box-shadow: 0 6px 6px rgba(0, 0, 0, 0.6);
+}
+button:hover{
+    background-color: antiquewhite;
+    color: rgb(39, 39, 39);
+}

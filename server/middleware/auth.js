@@ -4,7 +4,7 @@ const authService = require('../service/auth.service')
 
 const auth = async (req, res, next) => {
    const accessToken = req.header('x-auth-token');
-   const token = accessToken.slice(7)
+   const token = accessToken?.slice(7)
    console.log(token, ":token")
    if (!token) return res.status(401).send("ACCESS DENIED: Authorization token is undefined");
    try {

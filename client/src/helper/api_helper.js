@@ -10,3 +10,5 @@ export const login = (data) =>  axios.post(url+endPoint.LOGIN,data)
 export const register = (data) =>  axios.post(url+endPoint.REGISTER,data)
 
 export const listPrice = (data) => api.get(endPoint.LIST_PRICES,data)
+
+export const listMovies = (data) => api.get(endPoint.LIST_PRICES,data)
