@@ -21,6 +21,7 @@ const register =async (req,res) =>{
         return res.status(400).send({ message: constants.EMAIL_ALREADY_EXIST })
     }
  } catch (error) {
+    console.log(error,"error")
     return res.status(500).send({ message: error.message })
  }
     

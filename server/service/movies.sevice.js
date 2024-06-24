@@ -46,7 +46,7 @@ const list = async (genre) => {
             default:
                 throw new Error("Invalid query parameter");
         }
-
+        console.log(`${baseUrl}${url}`,"`${baseUrl}${url}`")
         const response = await axios.get(`${baseUrl}${url}`);
         return response.data;
     } catch (error) {

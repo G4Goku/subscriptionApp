@@ -62,3 +62,42 @@ div.callout {
     height: 60px;
 }
 
+/* movies list */
+
+.movies {
+    display: flex;
+    overflow-x: scroll;
+    overflow-y: hidden;
+}
+
+.movie {
+    /* width: 100%; */
+    max-height: 250px;
+    padding: 10px;
+    transition: 0.7s ease-in-out;
+    margin-bottom: 20px;
+}
+
+.row {
+    margin-left: 30px;
+}
+
+.movies::-webkit-scrollbar {
+    display: none;
+}
+
+.movie:hover {
+    transform: scale(1.1);
+    
+}
+.largemovie{
+    max-height: 350px;
+  
+}
+.kwkwkw{
+    z-index: 1;
+}
+
+
+
+

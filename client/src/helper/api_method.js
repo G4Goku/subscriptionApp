@@ -12,19 +12,19 @@ class APIClient {
     get = (path, data, params) => {
       setUrl(path);
       let response;
-      let paramKeys;
+      let paramKeys= [];
       const authToken = localStorage.getItem("authToken")
         ? localStorage.getItem("authToken")
         : null;
       if (authToken) axios.defaults.headers.common["x-auth-token"] = authToken;  
       if (params) {
-        Object.keys(params).map((key) => {
+        Object.keys(params).forEach((key) => {
           paramKeys.push(key + "=" + params[key]);
-          return paramKeys;
         });
+        console.warn(paramKeys,"paramKeys")
         const queryString =
           paramKeys && paramKeys.length ? paramKeys.join("&") : "";
-        response = axios.get(`${process.env.REACT_APP_BASE_URL}/${path}?${queryString}`, params);
+        response = axios.get(`${process.env.REACT_APP_BASE_URL}${path}?${queryString}`, params);
       } else if (data) {
         response = axios.get('/', data);
       } else{

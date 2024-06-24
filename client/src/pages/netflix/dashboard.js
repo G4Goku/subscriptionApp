@@ -1,11 +1,13 @@
 import React from "react";
+import Banner from "./components/Banner";
+import Movies from "./components/movies";
 
 const Dashboard = () => {
     return (
         <React.Fragment>
-            {/* <Banner fetchUrl={requests.fetchTrending}></Banner>
-            <Row isLargeRow={true} title="NetFlix Originals" fetchUrl={requests.fetchNetflixOriginals}></Row>
-            <Row title="Trending" fetchUrl={requests.fetchTrending}></Row>
+            <Banner/>
+            <Movies isLargeRow={true} genre={"NetFlix Originals"} genreKeyword={"originals"} />
+           {/* <Row title="Trending" fetchUrl={requests.fetchTrending}></Row>
 
             <Row title="Top Rated" fetchUrl={requests.fetchTopRated}></Row>
 
