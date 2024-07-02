@@ -1,13 +1,23 @@
 import React from "react";
 import Banner from "./components/Banner";
 import Movies from "./components/movies";
+import { Col, Container, Row } from "reactstrap";
 
 const Dashboard = () => {
     return (
         <React.Fragment>
-            <Banner/>
-            <Movies isLargeRow={true} genre={"NetFlix Originals"} genreKeyword={"originals"} />
-           {/* <Row title="Trending" fetchUrl={requests.fetchTrending}></Row>
+            <Container fluid>
+                <Row>
+                    {/* <Col lg={12}>
+                        <Banner />
+                    </Col> */}
+                    <Col lg={12}>
+                        <Movies isLargeRow={true} genre={"Netflix Originals"} genreKeyword={"originals"} />
+                    </Col>
+                </Row>
+            </Container>
+
+            {/* <Row title="Trending" fetchUrl={requests.fetchTrending}></Row>
 
             <Row title="Top Rated" fetchUrl={requests.fetchTopRated}></Row>
 

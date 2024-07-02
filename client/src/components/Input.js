@@ -32,7 +32,7 @@ const InputForm = (props) => {
             setPassword("")
             setUserName("")
         } catch (error) {
-            toast.error(error.response.data.message, {
+            toast.error(error?.response?.data?.message, {
                 position: toast.POSITION.TOP_RIGHT
             });
             console.error(error, "error");

@@ -13,6 +13,7 @@ const Movies = ({ genre, genreKeyword, isLargeRow }) => {
     const getData  = async ()=> {
         try {
             const result = await listMovies({genre: genreKeyword})
+            console.warn(result?.data?.results,"result")
            setMovies(result?.data?.results)
         } catch (error) {
             console.error(error)
@@ -24,8 +25,8 @@ const Movies = ({ genre, genreKeyword, isLargeRow }) => {
     }, [])
 
     return (
-        <div className='row'>
-            <h1>{genre}</h1>
+        <div>
+            <h1 style={{color:"black"}}>{genre}</h1>
             <div className='movies'>
                 {movies && movies?.map(movie => (
                     <img className={`movie ${isLargeRow && 'largemovie'}`}
