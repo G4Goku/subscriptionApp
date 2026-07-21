@@ -3,9 +3,12 @@ const stripe = require('stripe')(stripeSecretKey)
 
 const list = async () =>{
     let prices = await stripe.prices.list({
-        limit: 3,
+        active: true,
+        type: 'recurring',
+        limit: 10,
+        expand: ['data.product']
       });
-    return prices   
+    return prices
 }
 const subscribe = async (subId, priceId) =>{
     let session = await stripe.checkout.sessions.create({
