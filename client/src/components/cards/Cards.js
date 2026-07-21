@@ -54,6 +54,11 @@ const Cards = () => {
             navigate("/login")
             return true
         }
+        // already subscribed: there is nothing to buy, send them to the app
+        if (error?.response?.status === 409) {
+            navigate("/dashboard")
+            return true
+        }
         return false
     }
 

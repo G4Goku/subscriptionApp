@@ -2,6 +2,8 @@ const constants = require('../utils/constants')
 const subscriptionService = require('../service/subscription.service')
 
 const ACTIVE_STATUSES = ['active', 'trialing']
+// a trial or a fully discounted plan completes checkout without a charge
+const SETTLED_PAYMENT_STATUSES = ['paid', 'no_payment_required']
 
 const toEpochDate = (seconds) => (seconds ? new Date(seconds * 1000) : null)
 
@@ -46,6 +48,11 @@ const createSubscription = async (req, res) => {
         const price = await subscriptionService.getPrice(priceId).catch(() => null)
         if (!price || !price.active) return res.status(400).send({ message: constants.INVALID_PRICE })
 
+        // a second checkout would bill an already subscribed customer twice
+        const existing = await subscriptionService.listCustomerSubscriptions(user.stripeCustomerId)
+        const alreadySubscribed = (existing?.data ?? []).some((item) => ACTIVE_STATUSES.includes(item.status))
+        if (alreadySubscribed) return res.status(409).send({ message: constants.SUBSCRIPTION_ALREADY_ACTIVE })
+
         const session = await subscriptionService.subscribe(user.stripeCustomerId, priceId)
         if (!session || !session.url) return res.status(400).send({ message: constants.SUBSCRIPTION_FAILED })
         return res.status(200).send({
@@ -76,7 +83,7 @@ const confirmSubscription = async (req, res) => {
         if (!sessionCustomerId || sessionCustomerId !== user.stripeCustomerId) {
             return res.status(403).send({ message: constants.SUBSCRIPTION_SESSION_MISMATCH })
         }
-        if (session.status !== 'complete' || session.payment_status !== 'paid') {
+        if (session.status !== 'complete' || !SETTLED_PAYMENT_STATUSES.includes(session.payment_status)) {
             return res.status(402).send({ message: constants.SUBSCRIPTION_NOT_COMPLETED })
         }
 

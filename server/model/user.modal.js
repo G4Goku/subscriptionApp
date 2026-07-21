@@ -57,6 +57,10 @@ userSchema = new User({
     stripeCustomerId:{
         type: String
     },
+    isAdmin:{
+        type: Boolean,
+        default: false
+    },
     subscriptions : [subscriptionSchema],
 })
 

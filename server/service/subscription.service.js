@@ -45,18 +45,21 @@ const subscribe = async (subId, priceId) =>{
 }
 
 const getCheckoutSession = async (sessionId) => {
+    // items (and their prices) come back inline on the expanded subscription
     const session = await stripe.checkout.sessions.retrieve(sessionId, {
-        expand: ['subscription', 'subscription.items.data.price']
+        expand: ['subscription']
     })
     return session
 }
 
 const listCustomerSubscriptions = async (customerId) => {
+    // 'all' is needed because Stripe takes a single status and both active and
+    // trialing count as subscribed; the high limit keeps a long tail of
+    // cancelled subscriptions from pushing a live one off the page
     const subscriptions = await stripe.subscriptions.list({
         customer: customerId,
         status: 'all',
-        limit: 10,
-        expand: ['data.items.data.price']
+        limit: 100
     })
     return subscriptions
 }

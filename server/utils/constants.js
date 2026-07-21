@@ -20,6 +20,7 @@ const constants ={
     PRICE_ID_REQUIRED:"A plan must be selected before subscribing",
     INVALID_PRICE:"The selected plan is not available",
     STRIPE_CUSTOMER_MISSING:"No billing profile found for this account",
+    SUBSCRIPTION_ALREADY_ACTIVE:"This account already has an active subscription",
     SESSION_ID_REQUIRED:"Checkout session id is required",
     SUBSCRIPTION_SESSION_INVALID:"Checkout session could not be found",
     SUBSCRIPTION_SESSION_MISMATCH:"This checkout session belongs to another account",
