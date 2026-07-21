@@ -1,74 +1,43 @@
 import axios from "axios";
 
-const setUrl = (path) => {
-    axios.defaults.baseURL = process.env.REACT_APP_BASE_URL
-    if (path) {
-      axios.defaults.baseURL = `${process.env.REACT_APP_BASE_URL}${path}` 
-    }
-  }
+const AUTH_TOKEN_KEY = "authToken";
+
+export const getAuthToken = () => localStorage.getItem(AUTH_TOKEN_KEY);
+export const setAuthToken = (token) => localStorage.setItem(AUTH_TOKEN_KEY, token);
+export const clearAuthToken = () => localStorage.removeItem(AUTH_TOKEN_KEY);
+
+const client = axios.create({
+  baseURL: process.env.REACT_APP_BASE_URL,
+});
+
+// One place that attaches the token, so every verb is authenticated the same
+// way. The server expects `x-auth-token: Bearer <jwt>`.
+client.interceptors.request.use((config) => {
+  const token = getAuthToken();
+  if (token) config.headers["x-auth-token"] = `Bearer ${token}`;
+  return config;
+});
 
 class APIClient {
+  /**
+   * Fetch, optionally with query params
+   */
+  get = (path, params) => client.get(path, { params });
 
-    get = (path, data, params) => {
-      setUrl(path);
-      let response;
-      let paramKeys= [];
-      const authToken = localStorage.getItem("authToken")
-        ? localStorage.getItem("authToken")
-        : null;
-      if (authToken) axios.defaults.headers.common["x-auth-token"] = authToken;  
-      if (params) {
-        Object.keys(params).forEach((key) => {
-          paramKeys.push(key + "=" + params[key]);
-        });
-        console.warn(paramKeys,"paramKeys")
-        const queryString =
-          paramKeys && paramKeys.length ? paramKeys.join("&") : "";
-        response = axios.get(`${process.env.REACT_APP_BASE_URL}${path}?${queryString}`, params);
-      } else if (data) {
-        response = axios.get('/', data);
-      } else{
-        response = axios.get();
-      }
-      return response;
-    };
-  
-    /**
-     * post given data to url
-     */
-    create = (url, data, path) => {
-      setUrl(path);
-      const authToken = JSON.parse(localStorage.getItem("authUser"))
-        ? JSON.parse(localStorage.getItem("authUser")).result.token
-        : null;
-      if (authToken) axios.defaults.headers.common["Authorization"] = "Bearer " + authToken;
-      return axios.post(url, data);
-    };
-  
-    /**
-     * Updates data
-     */
-    update = (url, data, path) => {
-      setUrl(path);
-      const authToken = JSON.parse(localStorage.getItem("authUser"))
-        ? JSON.parse(localStorage.getItem("authUser")).result.token
-        : null;
-      if (authToken) axios.defaults.headers.common["Authorization"] = "Bearer " + authToken;
-      console.log("api helper", data);
-      return axios.patch(url, data);
-    };
-  
-    /**
-     * Delete
-     */
-    delete = (url, config) => {
-      const authToken = JSON.parse(localStorage.getItem("authUser"))
-        ? JSON.parse(localStorage.getItem("authUser")).result.token
-        : null;
-  
-      if (authToken) axios.defaults.headers.common["x-auth-token"] = authToken;
-      return axios.delete(url, { ...config });
-    };
-  }
+  /**
+   * post given data to url
+   */
+  create = (path, data) => client.post(path, data);
 
-  export { APIClient }
+  /**
+   * Updates data
+   */
+  update = (path, data) => client.patch(path, data);
+
+  /**
+   * Delete
+   */
+  delete = (path, config) => client.delete(path, { ...config });
+}
+
+export { APIClient, client };

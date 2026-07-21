@@ -7,49 +7,63 @@
     width: 316px;
 }
 
-.plan_side_table {
-    margin-left: 82px;
-    margin-top: 142px;
-}
-
 body {
 	font-family: Helvetica;
 	font-size: 13px;
 }
 
-div.callout {
-	height: 100px;
-	width: 110px;
-	float: left;
+/* plan comparison table */
+.plans_table th,
+.plans_table td {
+	text-align: center;
+	vertical-align: middle;
 }
 
-div.callout {
+.plans_table .plan_label {
+	text-align: left;
+	width: 28%;
+}
+
+.plan_column {
+	cursor: pointer;
+}
+
+.plan_column_selected {
+	background-color: rgba(216, 0, 0, 0.06);
+}
+
+.plan_callout {
 	background-color: #d80000;
 	position: relative;
 	color: #ffffff;
-    text-align: center;
+	text-align: center;
 	padding: 10px;
 	border-radius: 3px;
-	margin: 26px 0px 0px 30px;
 	min-height: 50px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 
-.callout::before {
+.plan_callout::after {
 	content: "";
+	position: absolute;
+	left: 50%;
+	bottom: -10px;
+	margin-left: -8px;
 	width: 0px;
 	height: 0px;
-	border: 0.8em solid transparent;
-	position: absolute;
-}
-
-.callout.top::before {
-	left: 40%;
-	bottom: -20px;
+	border: 8px solid transparent;
 	border-top: 10px solid #d80000;
 }
 
-.table_value{
-	margin-left: 70px;
+.subscribe_button {
+	min-width: 316px;
+}
+
+.subscription_result {
+	padding-top: 120px;
+	max-width: 420px;
 }
 /* dashboard nav bar */
 .nav{
