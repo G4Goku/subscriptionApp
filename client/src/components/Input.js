@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Form, FormGroup, Input, Label, Card, CardBody, } from "reactstrap";
 import { Link } from "react-router-dom"
 import { login, register } from '../helper/api_helper'
+import { setAuthToken } from '../helper/api_method'
 import { toast, ToastContainer } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
 
@@ -18,11 +19,11 @@ const InputForm = (props) => {
             if (props?.isLogin) {
                 response = await login({ email, password });
                 responseData = response.data;
-                localStorage.setItem('authToken', responseData.token);
+                setAuthToken(responseData.token);
             } else {
                 response = await register({ userName, email, password });
                 responseData = response.data;
-                localStorage.setItem('authToken', responseData.token);
+                setAuthToken(responseData.token);
             }
             responseData = response.data;
             toast.success(responseData.message, {

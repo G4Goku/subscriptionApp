@@ -1,14 +1,18 @@
-import axios from "axios";
 import * as endPoint from './enpoint_helper'
 import  { APIClient } from './api_method'
-const url = process.env.REACT_APP_BASE_URL
 
 const api = new APIClient();
 
-export const login = (data) =>  axios.post(url+endPoint.LOGIN,data)
+export const login = (data) =>  api.create(endPoint.LOGIN, data)
 
-export const register = (data) =>  axios.post(url+endPoint.REGISTER,data)
+export const register = (data) =>  api.create(endPoint.REGISTER, data)
 
-export const listPrice = (data) => api.get(endPoint.LIST_PRICES,data)
+export const listPrice = () => api.get(endPoint.LIST_PRICES)
 
-export const listMovies = (params) => api.get(endPoint.LIST_MOVIES, null, params)
+export const listMovies = (params) => api.get(endPoint.LIST_MOVIES, params)
+
+export const createSubscription = (data) => api.create(endPoint.CREATE_SUBSCRIPTION, data)
+
+export const confirmSubscription = (data) => api.create(endPoint.CONFIRM_SUBSCRIPTION, data)
+
+export const getSubscriptionStatus = () => api.get(endPoint.SUBSCRIPTION_STATUS)
