@@ -8,7 +8,11 @@ const constants ={
     REGISTRATION_SUCCESS: "User registered successfully",
 
     LOGIN_SUCCESS:"User logged in successfully",
-    
+
+    TOKEN_MISSING:"Access denied, authorization token is missing",
+    INVALID_TOKEN:"Access denied, authorization token is invalid or expired",
+    FORBIDDEN:"You do not have permission to perform this action",
+
     PRICE_LIST_FAILED:"Price listing failed",
     PRICE_LIST_SUCCESS:"Price listed successfully",
     SUBSCRIPTION_FAILED:"Subscription failed",
