@@ -1,29 +1,44 @@
 import React, { useState } from "react";
 import { Form, FormGroup, Input, Label, Card, CardBody, } from "reactstrap";
-import { Link } from "react-router-dom"
-import { login, register } from '../helper/api_helper'
+import { Link, useNavigate } from "react-router-dom"
+import { login, register, getSubscriptionStatus } from '../helper/api_helper'
 import { setAuthToken } from '../helper/api_method'
 import { toast, ToastContainer } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
 
 const InputForm = (props) => {
+    const navigate = useNavigate()
     const [userName, setUserName] = useState()
     const [email, setEmail] = useState()
     const [password, setPassword] = useState()
+
+    // an existing subscriber goes straight to the dashboard, everyone else
+    // continues into the plan flow
+    const destinationAfterLogin = async () => {
+        try {
+            const result = await getSubscriptionStatus()
+            return result?.data?.isSubscribed ? "/dashboard" : "/planCard"
+        } catch (error) {
+            return "/planCard"
+        }
+    }
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         let response
         let responseData
+        let destination
         try {
             if (props?.isLogin) {
                 response = await login({ email, password });
                 responseData = response.data;
                 setAuthToken(responseData.token);
+                destination = await destinationAfterLogin()
             } else {
                 response = await register({ userName, email, password });
                 responseData = response.data;
                 setAuthToken(responseData.token);
+                destination = "/choosePlan"
             }
             responseData = response.data;
             toast.success(responseData.message, {
@@ -32,6 +47,7 @@ const InputForm = (props) => {
             setEmail("")
             setPassword("")
             setUserName("")
+            navigate(destination)
         } catch (error) {
             toast.error(error?.response?.data?.message, {
                 position: toast.POSITION.TOP_RIGHT

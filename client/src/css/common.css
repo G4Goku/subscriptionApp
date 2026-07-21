@@ -60,6 +60,11 @@ body {
 .subscribe_button {
 	min-width: 316px;
 }
+
+.subscription_result {
+	padding-top: 120px;
+	max-width: 420px;
+}
 /* dashboard nav bar */
 .nav{
     width: 100%;
